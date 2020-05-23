@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane prefHeight="432.0" prefWidth="340.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.SignUpController">
+   <children>
+      <TextField fx:id="username" alignment="CENTER" layoutX="77.0" layoutY="49.0" promptText="Username" />
+      <PasswordField fx:id="password" alignment="CENTER" layoutX="77.0" layoutY="100.0" promptText="Password" />
+      <TextField fx:id="phone" alignment="CENTER" layoutX="77.0" layoutY="285.0" promptText="Phone number" />
+      <TextField fx:id="email" alignment="CENTER" layoutX="77.0" layoutY="240.0" promptText="Email" />
+      <TextField fx:id="lastname" alignment="CENTER" layoutX="77.0" layoutY="194.0" promptText="Last name" />
+      <TextField fx:id="firstname" alignment="CENTER" layoutX="77.0" layoutY="149.0" promptText="First name" />
+      <TextField fx:id="addressname" alignment="CENTER" layoutX="77.0" layoutY="327.0" promptText="Shipping address" />
+      <Button layoutX="138.0" layoutY="375.0" mnemonicParsing="false" onAction="#signUp" text="Sign up" />
+      <Label fx:id="error" layoutX="122.0" layoutY="14.0" text="Invalid input!" textFill="#eb0b0b" visible="false" />
+      <Button layoutX="26.0" layoutY="375.0" mnemonicParsing="false" onAction="#back" text="Back" />
+   </children>
+</AnchorPane>

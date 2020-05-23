@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+
+
+<AnchorPane prefHeight="254.0" prefWidth="327.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8" fx:controller="application.ManagerHomePageController">
+   <children>
+      <TextField fx:id="num" layoutX="80.0" layoutY="70.0" promptText="ISBN number" />
+      <Button layoutX="131.0" layoutY="137.0" mnemonicParsing="false" onAction="#confirm" text="Confirm" />
+   </children>
+</AnchorPane>

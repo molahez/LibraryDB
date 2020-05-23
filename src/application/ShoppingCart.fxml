@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane prefHeight="539.0" prefWidth="559.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.ShoppingCartController">
+   <children>
+      <TableView fx:id="table" layoutX="13.0" layoutY="75.0" prefHeight="284.0" prefWidth="529.0">
+        <columns>
+          <TableColumn fx:id="title" prefWidth="157.0" text="Book Title" />
+          <TableColumn fx:id="copies" prefWidth="157.0" text="Number of copies" />
+            <TableColumn fx:id="price" prefWidth="95.0" text="Price" />
+            <TableColumn fx:id="subprice" prefWidth="119.0" text="SubTo.price" />
+        </columns>
+      </TableView>
+      <TextField fx:id="total" layoutX="110.0" layoutY="470.0" prefHeight="31.0" prefWidth="113.0" />
+      <Label layoutX="33.0" layoutY="461.0" prefHeight="48.0" prefWidth="113.0" text="Total :" />
+      <Button layoutX="432.0" layoutY="464.0" mnemonicParsing="false" onAction="#checkOut" prefHeight="48.0" prefWidth="113.0" text="Checkout" />
+      <Label alignment="CENTER" layoutX="188.0" layoutY="21.0" prefHeight="48.0" prefWidth="184.0" text="Shopping Cart" textAlignment="RIGHT" />
+      <Button fx:id="Refresh" layoutX="430.0" layoutY="384.0" mnemonicParsing="false" onAction="#Refresh" prefHeight="48.0" prefWidth="113.0" text="Refresh" />
+   </children>
+</AnchorPane>

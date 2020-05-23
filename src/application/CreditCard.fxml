@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane prefHeight="331.0" prefWidth="327.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.CreditCardController">
+   <children>
+      <TextField fx:id="number" layoutX="52.0" layoutY="90.0" prefHeight="31.0" prefWidth="223.0" promptText="Credit card number" />
+      <TextField fx:id="date" layoutX="52.0" layoutY="135.0" prefHeight="31.0" prefWidth="223.0" promptText="expiry date as DD/MM/YYYY" />
+      <Button layoutX="122.0" layoutY="192.0" mnemonicParsing="false" onAction="#checkOut" text="Checkout" />
+      <Label fx:id="error" layoutX="122.0" layoutY="36.0" prefHeight="21.0" prefWidth="83.0" text="Invalid card!" textFill="#f20808" visible="false" />
+   </children>
+</AnchorPane>

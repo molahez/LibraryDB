@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+
+
+<AnchorPane prefHeight="265.0" prefWidth="285.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8" fx:controller="application.ManagerHomePageController">
+   <children>
+      <TextField fx:id="name" layoutX="49.0" layoutY="69.0" promptText="Username" />
+      <Button layoutX="103.0" layoutY="133.0" mnemonicParsing="false" onAction="#promote" text="Promote" />
+   </children>
+</AnchorPane>

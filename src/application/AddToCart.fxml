@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane prefHeight="395.0" prefWidth="332.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.AddToCartController">
+   <children>
+      <ComboBox fx:id="combo" layoutX="76.0" layoutY="108.0" prefHeight="31.0" prefWidth="181.0" promptText="Number of copies" />
+      <Button fx:id="addB" layoutX="111.0" layoutY="188.0" mnemonicParsing="false" onAction="#add" prefHeight="31.0" prefWidth="103.0" text="Add to cart" />
+      <Button fx:id="edit" layoutX="115.0" layoutY="276.0" mnemonicParsing="false" onAction="#editBook" prefHeight="31.0" prefWidth="103.0" text="Edit book"/>
+      <Label fx:id="or" layoutX="154.0" layoutY="240.0" text="Or" visible="false" />
+      <Label fx:id="error" layoutX="97.0" layoutY="43.0" text="Item is out of stock!" textFill="#f20707" />
+   </children>
+</AnchorPane>

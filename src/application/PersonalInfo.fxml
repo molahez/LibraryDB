@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane prefHeight="394.0" prefWidth="327.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.PersonalData">
+   <children>
+      <TextField fx:id="username" layoutX="70.0" layoutY="45.0" text="ahmed" />
+      <TextField fx:id="firstname" layoutX="70.0" layoutY="131.0" />
+      <TextField fx:id="lastname" layoutX="70.0" layoutY="175.0" />
+      <TextField fx:id="email" layoutX="70.0" layoutY="215.0" />
+      <TextField fx:id="phone" layoutX="70.0" layoutY="259.0" />
+      <TextField fx:id="addressname" layoutX="70.0" layoutY="301.0" />
+      <PasswordField fx:id="password" layoutX="70.0" layoutY="90.0" />
+      <Button layoutX="131.0" layoutY="340.0" mnemonicParsing="false" onAction="#savePersonalInfo" text="Save" />
+   </children>
+</AnchorPane>

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane prefHeight="516.0" prefWidth="354.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.ManagerHomePageController">
+   <children>
+      <Button layoutX="75.0" layoutY="76.0" mnemonicParsing="false" onAction="#personalInfo" prefHeight="31.0" prefWidth="205.0" text="Edit Personal Info" />
+      <Button layoutX="75.0" layoutY="117.0" mnemonicParsing="false" onAction="#shoppingCart" prefHeight="31.0" prefWidth="205.0" text="My shopping cart" />
+      <Button layoutX="75.0" layoutY="163.0" mnemonicParsing="false" onAction="#searchForBooks" prefHeight="31.0" prefWidth="205.0" text="Search for a book" />
+      <Button fx:id="add" layoutX="75.0" layoutY="208.0" mnemonicParsing="false" onAction="#addBook" prefHeight="31.0" prefWidth="205.0" text="Add a new book" />
+      <Button layoutX="73.0" layoutY="253.0" mnemonicParsing="false" onAction="#placeOrder" prefHeight="31.0" prefWidth="205.0" text="Place an order" />
+      <Button layoutX="73.0" layoutY="299.0" mnemonicParsing="false" onAction="#confirmOrder" prefHeight="31.0" prefWidth="205.0" text="Confrim an order" />
+      <Button layoutX="73.0" layoutY="342.0" mnemonicParsing="false" onAction="#viewReports" prefHeight="31.0" prefWidth="205.0" text="view reports" />
+      <Button layoutX="73.0" layoutY="385.0" mnemonicParsing="false" onAction="#promoteUser" prefHeight="31.0" prefWidth="205.0" text="promote users" />
+      <Button fx:id="signout" layoutX="73.0" layoutY="427.0" mnemonicParsing="false" onAction="#logout" prefHeight="31.0" prefWidth="205.0" text="Logout" />
+   </children>
+</AnchorPane>
