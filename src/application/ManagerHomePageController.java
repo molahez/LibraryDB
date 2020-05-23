@@ -17,6 +17,7 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Alert.AlertType;
 import javafx.stage.Stage;
+import net.sf.jasperreports.engine.JRException;
 
 public class ManagerHomePageController {
 	static boolean manager = false;
@@ -29,8 +30,8 @@ public class ManagerHomePageController {
 		Search.manager = manager;
 	}
 
-    @FXML
-    Button add;
+	@FXML
+	Button add;
 	@FXML
 	TextField username = new TextField();
 	@FXML
@@ -110,16 +111,11 @@ public class ManagerHomePageController {
 		primaryStage.show();
 	}
 
-
-
-
-
 	@FXML
 	TextField number;
 	@FXML
 	TextField quantity;
 
-	
 	@FXML
 	public void addBook(ActionEvent event) throws IOException {
 		Stage primaryStage = new Stage();
@@ -130,6 +126,7 @@ public class ManagerHomePageController {
 		primaryStage.setScene(scene1);
 		primaryStage.show();
 	}
+
 	@FXML
 	public void placeOrder(ActionEvent event) throws IOException {
 		Stage primaryStage = new Stage();
@@ -144,10 +141,27 @@ public class ManagerHomePageController {
 
 	@FXML
 	public void place(ActionEvent event) throws IOException {
+		if (number.getText().compareTo("") != 0 && quantity.getText().compareTo("") != 0) {
 
-		// insert into book orders
-		Stage stage = (Stage) number.getScene().getWindow();
-		stage.close();
+			ManagerFunctions mf = new ManagerFunctions();
+
+			if (mf.add_order(number.getText(), quantity.getText())) {
+				Stage stage = (Stage) number.getScene().getWindow();
+				stage.close();
+			} else {
+
+				number.setText("");
+				quantity.setText("");
+
+			}
+		} else {
+			Alert errorAlert = new Alert(AlertType.ERROR);
+			errorAlert.setHeaderText("Error");
+			errorAlert.setContentText("Fields are incompelte, Please fill it");
+			errorAlert.showAndWait();
+
+		}
+
 	}
 
 	@FXML
@@ -155,6 +169,7 @@ public class ManagerHomePageController {
 
 	@FXML
 	public void confirmOrder(ActionEvent event) throws IOException {
+
 		Stage primaryStage = new Stage();
 		Parent root;
 		root = FXMLLoader.load(getClass().getResource("/application/ConfirmOrder.fxml"));
@@ -166,10 +181,27 @@ public class ManagerHomePageController {
 
 	@FXML
 	public void confirm(ActionEvent event) throws IOException {
+		if (num.getText().compareTo("") != 0) {
 
-		// confirm order
-		Stage stage = (Stage) num.getScene().getWindow();
-		stage.close();
+			ManagerFunctions mf = new ManagerFunctions();
+
+			if (mf.confirm_order(num.getText())) {
+
+				Stage stage = (Stage) num.getScene().getWindow();
+				stage.close();
+			} else {
+
+				num.setText("");
+
+			}
+		} else {
+			Alert errorAlert = new Alert(AlertType.ERROR);
+			errorAlert.setHeaderText("Error");
+			errorAlert.setContentText("Fields are incompelte, Please fill it");
+			errorAlert.showAndWait();
+
+		}
+
 	}
 
 	@FXML
@@ -177,8 +209,6 @@ public class ManagerHomePageController {
 
 	@FXML
 	public void promoteUser(ActionEvent event) throws IOException {
-		
-		
 
 		Stage primaryStage = new Stage();
 		Parent root;
@@ -192,18 +222,17 @@ public class ManagerHomePageController {
 
 	@FXML
 	public void promote(ActionEvent event) throws IOException {
-		if(name.getText().compareTo("") != 0) {
+		if (name.getText().compareTo("") != 0) {
 			Login logger = new Login();
 			String res = logger.signin(name.getText());
 			if (res.compareTo("empty") != 0) {
 				String status = "empty";
 				status = logger.user_type(name.getText());
-				if(status.compareTo("manager") == 0) {
+				if (status.compareTo("manager") == 0) {
 					Alert errorAlert = new Alert(AlertType.INFORMATION);
 					errorAlert.setHeaderText("Nothing is to be done here user is already a manager");
 					errorAlert.showAndWait();
-				}
-				else if (status.compareTo("customer") == 0) {
+				} else if (status.compareTo("customer") == 0) {
 					ManagerFunctions mngrfnc = new ManagerFunctions();
 					mngrfnc.user_promot(name.getText());
 
@@ -212,17 +241,14 @@ public class ManagerHomePageController {
 
 				Stage stage = (Stage) name.getScene().getWindow();
 				stage.close();
-			}
-			else {
+			} else {
 				name.setText("");
 				Alert errorAlert = new Alert(AlertType.ERROR);
 				errorAlert.setHeaderText("Username doesn't exist to upgrade it");
 				errorAlert.showAndWait();
 			}
-			
 
-		}
-		else {
+		} else {
 			name.setText("");
 			Alert errorAlert = new Alert(AlertType.ERROR);
 			errorAlert.setHeaderText("Error");
@@ -234,12 +260,49 @@ public class ManagerHomePageController {
 
 	@FXML
 	public void viewReports(ActionEvent event) throws IOException {
-		Stage primaryStage = new Stage();
-		Parent root;
-		root = FXMLLoader.load(getClass().getResource("/application/ViewReports.fxml"));
-		Scene scene1 = new Scene(root, 327, 254);
-		scene1.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
-		primaryStage.setScene(scene1);
-		primaryStage.show();
+		ManagerFunctions mngrfnc = new ManagerFunctions();
+
+		ArrayList<ArrayList<String>> report1 = mngrfnc.Total_sales();// add array 1 here
+		ArrayList<ArrayList<String>> report2 = mngrfnc.top_customers();// add array 2 here
+		ArrayList<ArrayList<String>> report3 = mngrfnc.best_sales();// add array 3 here
+		
+JasperReports jasper = new JasperReports();
+		
+		ArrayList<BookReport1> list1 = new ArrayList<BookReport1>();
+		for(int i = 0; i < report1.size(); i++) {
+			BookReport1 b1 = new BookReport1(report1.get(i).get(1), report1.get(i).get(2), report1.get(i).get(0), report1.get(i).get(3));
+			list1.add(b1);
+		}
+		try {
+			jasper.totalSales(list1);
+		} catch (JRException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		ArrayList<UserReport> list2 = new ArrayList<UserReport>();
+		for(int i = 0; i < report2.size(); i++) {
+			UserReport b1 = new UserReport(report2.get(i).get(0), report2.get(i).get(1), report2.get(i).get(2), report2.get(i).get(3));
+			list2.add(b1);
+		}
+		try {
+			jasper.topPurchasing(list2);
+		} catch (JRException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		ArrayList<BookReport1> list3 = new ArrayList<BookReport1>();
+		for(int i = 0; i < report3.size(); i++) {
+			BookReport1 b1 = new BookReport1(report3.get(i).get(1), report3.get(i).get(2), report3.get(i).get(0), report3.get(i).get(3));
+			list3.add(b1);
+		}
+		try {
+			jasper.topTen(list3);
+		} catch (JRException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
 	}
 }

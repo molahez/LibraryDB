@@ -5,8 +5,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.AnchorPane?>
 
-
-<AnchorPane prefHeight="441.0" prefWidth="425.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8" fx:controller="application.AddToCartController">
+<AnchorPane prefHeight="441.0" prefWidth="425.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.EditBookController">
    <children>
       <Label layoutX="27.0" layoutY="85.0" prefHeight="21.0" prefWidth="47.0" text="Title :" />
       <Label layoutX="27.0" layoutY="125.0" prefHeight="21.0" prefWidth="67.0" text="Author :" />
@@ -25,5 +24,7 @@
       <TextField fx:id="categoryField" layoutX="204.0" layoutY="292.0" />
       <TextField fx:id="yearField" layoutX="204.0" layoutY="334.0" />
       <Button layoutX="143.0" layoutY="387.0" mnemonicParsing="false" onAction="#save" prefHeight="31.0" prefWidth="101.0" text="Save" />
+      <Label layoutX="27.0" layoutY="14.0" prefHeight="21.0" prefWidth="101.0" text="Threshold: " />
+      <TextField fx:id="thresholdField" layoutX="204.0" layoutY="9.0" />
    </children>
 </AnchorPane>

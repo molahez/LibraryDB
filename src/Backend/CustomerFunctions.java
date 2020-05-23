@@ -142,7 +142,7 @@ public class CustomerFunctions implements ICustomerFunctions {
 	public ArrayList<ArrayList<String>> book_search(String value, String attribute) {
 		ArrayList<ArrayList<String>> data = new ArrayList<>();
 		DB_connection();
-		String q1 = "SELECT ISBNnumber,Title,Author,PublisherName ,PublicationYear,SellingPrice,Category,Copies,threshold FROM bookstore.book where "
+		String q1 = "SELECT ISBNnumber,Title,Author,PublisherName ,YEAR(STR_TO_DATE(PublicationYear, \"%Y/%m/%d\")),SellingPrice,Category,Copies,threshold FROM bookstore.book where "
 				+ attribute + "= \"" + value + "\"";
 		try {
 			pst = con.prepareStatement(q1);
@@ -153,6 +153,7 @@ public class CustomerFunctions implements ICustomerFunctions {
 				ArrayList<String> temp = new ArrayList<String>();
 
 				for (int i = 1; i <= cols; i++) {
+
 					temp.add(rs.getString(i));
 				}
 

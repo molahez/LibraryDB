@@ -130,11 +130,174 @@ public class ManagerFunctions implements IMangerFunctions {
 			flag = true;
 			System.out.println("You have succeccfully changed data");
 		} catch (SQLException ex) {
-			System.out.println("Update Failed Username already exists:\n" + ex.toString());
+			System.out.println("Update Failed ISBN already exists:\n" + ex.toString());
 			ex.printStackTrace();
 		}
 
 		return flag;
 	}
+	
+	@Override
+	public boolean add_order(String isbn, String quantity) {
+		Boolean flag = false;
+		DB_connection();
+		// Here we will insert New book data from Manager
+		String sql = ("INSERT INTO BookOrders (ISBNnumber, copies) "
+				+ "VALUES (?, ?)");
+
+		try {
+			pst = con.prepareStatement(sql);
+			pst.setString(1, isbn);
+			pst.setString(2, quantity);
+
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		try {
+			pst.executeUpdate();
+			con.close();
+			System.out.println("order has been succeccfully  inserted");
+			flag = true;
+		} catch (SQLException ex) {
+			System.out.println("Insertion Failed\n" + ex.toString());
+			ex.printStackTrace();
+		}
+
+		return flag;
+
+	}
+	@Override
+	public boolean confirm_order(String isbn) {
+		Boolean flag = false;
+		DB_connection();
+		// Here we will insert New book data from Manager
+		String sql = "delete from BookOrders where ISBNnumber = ?";
+
+		try {
+			pst = con.prepareStatement(sql);
+			pst.setString(1, isbn);
+
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		try {
+				pst.executeUpdate();
+			con.close();
+			System.out.println("order has been succeccfully confirmed");
+			flag = true;
+		} catch (SQLException ex) {
+			System.out.println("Insertion Failed\n" + ex.toString());
+			ex.printStackTrace();
+		}
+
+		return flag;
+
+	}
+
+	@Override
+	public ArrayList<ArrayList<String>> Total_sales() {
+		ArrayList<ArrayList<String>> data = new ArrayList<>();
+		DB_connection();
+		String q1 = "SELECT \r\n" + 
+				"t1.ISBNnumber ,t1.Title , sum , count\r\n" + 
+				"from book t1\r\n" + 
+				"join(SELECT soldbooks.ISBN , sum(soldbooks.soldCopies)as sum,count(soldbooks.ISBN) as count\r\n" + 
+				"FROM soldbooks \r\n" + 
+				"WHERE soldbooks.sellingdate >= (NOW() - INTERVAL 1 MONTH) \r\n" + 
+				"GROUP BY soldbooks.ISBN) t2\r\n" + 
+				"on t1.ISBNnumber = t2.ISBN";
+		try {
+			pst = con.prepareStatement(q1);
+			rs = pst.executeQuery();
+			md = (ResultSetMetaData) rs.getMetaData();
+			int cols = md.getColumnCount();
+			while (rs.next()) {
+				ArrayList<String> temp = new ArrayList<String>();
+
+				for (int i = 1; i <= cols; i++) {
+					temp.add(rs.getString(i));
+				}
+
+				data.add(temp);
+
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return data;
+	}
+
+	@Override
+	public ArrayList<ArrayList<String>> best_sales() {
+		ArrayList<ArrayList<String>> data = new ArrayList<>();
+		DB_connection();
+		String q1 = "SElECT \r\n" + 
+				"t1.ISBNnumber ,t1.Title , sum , count\r\n" +
+				"from book t1\r\n" + 
+				"join(SELECT  ISBN , sum(soldbooks.soldCopies) as sum ,count(soldbooks.ISBN) as count\r\n" + 
+				" FROM soldbooks \r\n" + 
+				" WHERE soldbooks.sellingdate >= (NOW() - INTERVAL 3 MONTH)  \r\n" + 
+				" GROUP BY ISBN\r\n" + 
+				"  LIMIT 10) t2\r\n" + 
+				"  on t1.ISBNnumber = t2.ISBN;";
+		try {
+			pst = con.prepareStatement(q1);
+			rs = pst.executeQuery();
+			md = (ResultSetMetaData) rs.getMetaData();
+			int cols = md.getColumnCount();
+			while (rs.next()) {
+				ArrayList<String> temp = new ArrayList<String>();
+
+				for (int i = 1; i <= cols; i++) {
+					temp.add(rs.getString(i));
+				}
+
+				data.add(temp);
+
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return data;
+	}
+
+	@Override
+	public ArrayList<ArrayList<String>> top_customers() {
+		ArrayList<ArrayList<String>> data = new ArrayList<>();
+		DB_connection();
+		String q1 = "select t1.firstName , t1.lastName,t2.Totalpaid, t2.numberofpurchases from users t1 join (select * ,sum(purchases.amountpaid) as Totalpaid, count(purchases.username) as numberofpurchases\r\n" + 
+				"from purchases\r\n" + 
+				"group by username\r\n" + 
+				"order by  Totalpaid desc\r\n" + 
+				"limit 5) t2\r\n" + 
+				"on t1.username = t2.username;";
+		try {
+			pst = con.prepareStatement(q1);
+			rs = pst.executeQuery();
+			md = (ResultSetMetaData) rs.getMetaData();
+			int cols = md.getColumnCount();
+			while (rs.next()) {
+				ArrayList<String> temp = new ArrayList<String>();
+
+				for (int i = 1; i <= cols; i++) {
+					temp.add(rs.getString(i));
+				}
+
+				data.add(temp);
+
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return data;
+	}
+	
 
 }

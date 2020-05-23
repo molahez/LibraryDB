@@ -35,22 +35,7 @@ public class AddToCartController implements Initializable {
 	Button addB;
 	@FXML
 	Button edit = new Button();
-	@FXML
-	TextField isbnField;
-	@FXML
-	TextField titleField;
-	@FXML
-	TextField aothorField;
-	@FXML
-	TextField priceField;
-	@FXML
-	TextField copiesField;
-	@FXML
-	TextField publisherField;
-	@FXML
-	TextField categoryField;
-	@FXML
-	TextField yearField;
+
 	
 	@FXML
 	public void add(ActionEvent event) throws IOException {
@@ -63,18 +48,7 @@ public class AddToCartController implements Initializable {
 	}
 	
 	@FXML
-	public void editBook(ActionEvent event) throws IOException {
-	
-
-		isbnField.setText(book.getIsbn());
-		/*titleField.setText(b.getTitle());
-		aothorField.setText(b.getAuthor());
-		priceField.setText(b.getPrice());
-		copiesField.setText(b.getCopies());
-		publisherField.setText(b.getPublisher());
-		categoryField.setText(b.getCategory());
-		yearField.setText(b.getYear());*/
-		
+	public void editBook(ActionEvent event) throws IOException {		
 		Stage primaryStage = new Stage();
 		Parent root;
 		root = FXMLLoader.load(getClass().getResource("/application/EditBook.fxml"));
@@ -85,25 +59,7 @@ public class AddToCartController implements Initializable {
 		Stage stage = (Stage) combo.getScene().getWindow();
 	    stage.close();
 	}
-	@FXML
-	public void save(ActionEvent event) throws IOException {
-		
-		isbnField.setText(book.getIsbn());
-		titleField.setText(book.getTitle());
-		aothorField.setText(book.getAuthor());
-		priceField.setText(book.getPrice());
-		copiesField.setText(book.getCopies());
-		publisherField.setText(book.getPublisher());
-		categoryField.setText(book.getCategory());
-		yearField.setText(book.getYear());
-		
-		//update book from fields
-		
-		Stage stage = (Stage) isbnField.getScene().getWindow();
-	    stage.close();
-	    
-	    // refresh table view
-	}
+
 	
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		edit.setVisible(false);
@@ -117,7 +73,7 @@ public class AddToCartController implements Initializable {
 
 		String status = "empty";
 		manager = logger.user_type(Main.getusername());
-
+		manager = "manager";
 		error.setVisible(false);
 		if(Integer.parseInt(book.getCopies()) == 0) {
         	error.setVisible(true);
